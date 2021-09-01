@@ -5,7 +5,7 @@
 
 
     <application
-        android:label="intergez_webview"
+        android:label="Intergez"
         android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"

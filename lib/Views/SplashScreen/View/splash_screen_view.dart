@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:in_app_update/in_app_update.dart';
 import 'package:intergez_webview/Views/HomePage/View/home_page_view.dart';
 import 'package:intergez_webview/Views/NoNetwork/View/no_network.dart';
 
@@ -145,6 +146,10 @@ class _SplashScreenViewState extends State<SplashScreenView> {
 
   Future<bool> hasNetwork() async {
     try {
+      AppUpdateInfo updateInfo = await InAppUpdate.checkForUpdate();
+      if(updateInfo.updateAvailability==UpdateAvailability.updateAvailable){
+        await InAppUpdate.performImmediateUpdate();
+      }
       await Future.delayed(Duration(seconds: 2));
       final result = await InternetAddress.lookup('intergez.com');
       return result.isNotEmpty && result[0].rawAddress.isNotEmpty;
