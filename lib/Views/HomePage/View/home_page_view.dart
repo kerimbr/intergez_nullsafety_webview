@@ -74,9 +74,37 @@ class _HomePageViewState extends State<HomePageView> {
         if(webViewController != null) {
           if (await webViewController!.canGoBack()) {
             await webViewController!.goBack();
+            return false;
+          }else {
+            await showDialog<void>(
+              context: context,
+              barrierDismissible: true, // false = user must tap button, true = tap outside dialog
+              builder: (BuildContext dialogContext) {
+                return AlertDialog(
+                  title: Text('Uygulama kapatılsın mı ?'),
+                  content: Text('Uygulamadan çıkmak istiyor musunuz?'),
+                  actions: <Widget>[
+                    TextButton(
+                      child: Text('Vazgeç'),
+                      style: TextButton.styleFrom(
+                        primary: Colors.grey.shade800
+                      ),
+                      onPressed: () {
+                        Navigator.of(dialogContext).pop(); // Dismiss alert dialog
+                      },
+                    ),
+                    TextButton(
+                      child: Text('Kapat'),
+                      onPressed: () {
+                        SystemNavigator.pop(); // Dismiss alert dialog
+                      },
+                    ),
+                  ],
+                );
+              },
+            );
+            return false;
           }
-
-          return false;
         }else{
           return true;
         }

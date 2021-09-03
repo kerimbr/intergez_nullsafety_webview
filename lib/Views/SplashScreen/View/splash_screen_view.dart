@@ -90,6 +90,7 @@ class _SplashScreenViewState extends State<SplashScreenView> {
 
   Widget buildSplash(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xffB03242),
       body: Container(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
